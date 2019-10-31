@@ -2558,7 +2558,7 @@ dc.baseMixin = function (_chart) {
      * This function is passed to d3 as the onClick handler for each chart. The default behavior is to
      * filter on the clicked datum (passed to the callback) and redraw the chart group.
      *
-     * This function can be replaced in order to change the click behavior (but first look at 
+     * This function can be replaced in order to change the click behavior (but first look at
      * @method onClick
      * @memberof dc.baseMixin
      * @instance
