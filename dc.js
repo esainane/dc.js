@@ -6745,7 +6745,7 @@ dc.barChart = function (parent, chartGroup) {
     var _centerBar = false;
     var _alwaysUseRounding = false;
 
-    var _barWidth;
+    var _barWidth, _barWidthMultiplier = 1;
 
     dc.override(_chart, 'rescale', function () {
         _chart._rescale();
@@ -6906,7 +6906,7 @@ dc.barChart = function (parent, chartGroup) {
 
     function calculateBarWidth () {
         if (_barWidth === undefined) {
-            var numberOfBars = _chart.xUnitCount();
+            var numberOfBars = _chart.xUnitCount() / _barWidthMultiplier;
 
             // please can't we always use rangeBands for bar charts?
             if (_chart.isOrdinal() && _gap === undefined) {
@@ -6922,6 +6922,12 @@ dc.barChart = function (parent, chartGroup) {
             }
         }
     }
+
+    _chart.barWidthMultiplier = function(_) {
+        if (!_) { return _barWidthMultiplier; }
+        _barWidthMultiplier = _;
+        return _chart;
+    };
 
     _chart.fadeDeselectedArea = function (brushSelection) {
         var bars = _chart.chartBodyG().selectAll('rect.bar');
