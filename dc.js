@@ -5561,6 +5561,7 @@ dc.pieChart = function (parent, chartGroup) {
     var _externalLabelRadius;
     var _drawPaths = false;
     var _chart = dc.capMixin(dc.colorMixin(dc.baseMixin({})));
+    var _sliceSorter = null;
 
     _chart.colorAccessor(_chart.cappedKeyAccessor);
 
@@ -5962,8 +5963,16 @@ dc.pieChart = function (parent, chartGroup) {
         return _chart;
     };
 
+    _chart.sliceSorter = function (_) {
+        if (!arguments.length) {
+            return _sliceSorter;
+        }
+        _sliceSorter = _;
+        return _chart;
+    };
+
     function pieLayout () {
-        return d3.pie().sort(null).value(_chart.cappedValueAccessor);
+        return d3.pie().sort(_sliceSorter).value(_chart.cappedValueAccessor);
     }
 
     function sliceTooSmall (d) {
